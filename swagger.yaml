@@ -1,0 +1,390 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "API IoT"
+tags:
+- name: "user"
+  description: "Opérations sur des utilisateurs"
+- name: "ambience"
+  description: "Opérations sur des ambiances"
+- name: "connectedObject"
+  description: "Opérations sur les objets connectés"
+schemes:
+- "https"
+paths:
+  /ambience:
+    post:
+      tags:
+      - "ambience"
+      summary: "Crée une ambiance"
+      description: "Permet d'ajouter une nouvelle ambiance dans la base de données"
+      operationId: "createAmbience"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Ambiance au format JSON"
+        required: true
+        schema:
+          $ref: "#/definitions/Ambience"
+      responses:
+        200:
+          description: "successful operation"
+    put:
+      tags:
+      - "ambience"
+      summary: "Met à jour une ambiance"
+      description: "Permet de mettre à jour une ambiance dans la base de données"
+      operationId: "updateAmbience"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Ambiance au format JSON"
+        required: true
+        schema:
+          $ref: "#/definitions/Ambience"
+      responses:
+        200:
+          description: "successful operation"
+  /ambience/{name}:
+    get:
+      tags:
+      - "ambience"
+      summary: "Récupère une ambiance par son nom"
+      description: ""
+      operationId: "getAmbienceByName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Le nom de l'ambiance à récupérer"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Ambience"
+        "404":
+          description: "L'ambiance n'a pas été trouvée"
+    delete:
+      tags:
+      - "ambience"
+      summary: "Supprime une ambiance"
+      description: "Appel uniquement possible si l'utilisateur est connecté."
+      operationId: "deleteAmbience"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Le nom de l'ambiance a supprimer"
+        required: true
+        type: "string"
+      responses:
+        "404":
+          description: "L'ambiance n'a pas été trouvée."
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      description: "Permet de créer un nouvel utilisateur dans la base de données"
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User au format JSON"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "successful operation"
+  /user/login:
+    get:
+      tags:
+      - "user"
+      summary: "Connecte un utilisateur"
+      description: ""
+      operationId: "loginUser"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "Nom d'utilisateur"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "Mot de passe"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid username/password supplied"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Déconnecte un utilisateur"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+  /user/{username}:
+    get:
+      tags:
+      - "user"
+      summary: "Récupère un utilisateur par son nom d'utilisateur"
+      description: ""
+      operationId: "getUserByName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "Le nom de l'utilisateur à récupérer"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/UserPrivate"
+        "404":
+          description: "User not found"
+    delete:
+      tags:
+      - "user"
+      summary: "Supprime un utilisateur"
+      description: "Appel uniquement possible si l'utilisateur est connecté."
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
+  /connectedObject:
+    post:
+      tags:
+      - "connectedObject"
+      summary: "Create connectedObject"
+      description: "Permet de créer un nouvel connectedObject dans la base de données"
+      operationId: "createConnectedObject"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "connectedObject au format JSON"
+        required: true
+        schema:
+          $ref: "#/definitions/ConnectedObjectPublic"
+      responses:
+        200:
+          description: "successful operation"
+  /connectedObject/login:
+    get:
+      tags:
+      - "connectedObject"
+      summary: "Connecte un connectedObject"
+      description: ""
+      operationId: "loginConnectedObject"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "Nom d'utilisateur"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "Mot de passe"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid username/password supplied"
+  /connectedObject/{name}:
+    get:
+      tags:
+      - "connectedObject"
+      summary: "Récupère un connectedObject par son nom"
+      description: ""
+      operationId: "getConnectedObjectByName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Le nom du connectedObject à récupérer"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ConnectedObjectPublic"
+        "404":
+          description: "connectedObject not found"
+    delete:
+      tags:
+      - "connectedObject"
+      summary: "Supprime un connectedObject"
+      description: "Appel uniquement possible si l'connectedObject est connecté."
+      operationId: "deleteConnectedObject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "The name that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
+  /connectedObject/findByUsername/{username}:
+    get:
+      tags:
+      - "connectedObject"
+      summary: "Récupère une liste de connectedObject de l'utilisateur spécifié par son username"
+      description: ""
+      operationId: "getConnectedObjectByUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "Le nom de l'utilisateur"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ConnectedObjectPublic"
+        "404":
+          description: "connectedObject not found"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  ConnectedObjectPublic:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      type:
+        type: "string"
+      name:
+        type: "string"
+      ip_address:
+        type: "string"
+      user:
+        type: "string"
+  Ambience:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      States:
+        type: "array"
+        items:
+         $ref: "#/definitions/State"
+  State:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      colors:
+        type: "array"
+        items:
+          type: "integer"
+      factors:
+        type: "array"
+        items:
+          $ref: "#/definitions/Factor"
+      conditions:
+        type: "array"
+        items:
+          $ref: "#/definitions/Condition"
+  Factor:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      value:
+        type: "integer"
+  Condition:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      operator:
+        type: "string"
+      value:
+        type: "integer"
+  User:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+  UserPrivate:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+    xml:
+      name: "User"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
