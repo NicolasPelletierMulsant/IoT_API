@@ -142,7 +142,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{base_url}}/connectedObject/roboto",
+							"raw": "http://{{base_url}}/connectedObject/roboto?user=jean",
 							"protocol": "http",
 							"host": [
 								"{{base_url}}"
@@ -150,6 +150,12 @@
 							"path": [
 								"connectedObject",
 								"roboto"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "jean"
+								}
 							]
 						}
 					},
@@ -208,7 +214,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{base_url}}/connectedObject/roboto",
+							"raw": "http://{{base_url}}/connectedObject/roboto?user=jean",
 							"protocol": "http",
 							"host": [
 								"{{base_url}}"
@@ -216,6 +222,94 @@
 							"path": [
 								"connectedObject",
 								"roboto"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "jean"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ambience",
+			"item": [
+				{
+					"name": "Create Ambience",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"ambiance_0\",\r\n  \"user\": \"jean\",\r\n  \"states\": [\r\n    {\r\n      \"type\": \"string\",\r\n      \"colors\": [\r\n        0\r\n      ],\r\n      \"factors\": [\r\n        {\r\n          \"type\": \"string\",\r\n          \"value\": 0\r\n        }\r\n      ],\r\n      \"conditions\": [\r\n        {\r\n          \"type\": \"string\",\r\n          \"operator\": \"string\",\r\n          \"value\": 0\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/ambience",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ambience"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ambience",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{base_url}}/ambience/ambiance_0?user=jean",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ambience",
+								"ambiance_0"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "jean"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ambience",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{base_url}}/ambience/ambiance_0?user=jean",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ambience",
+								"ambiance_0"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "jean"
+								}
 							]
 						}
 					},
