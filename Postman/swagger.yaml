@@ -109,7 +109,7 @@ paths:
         200:
           description: "successful operation"
   /user/login:
-    get:
+    post:
       tags:
       - "user"
       summary: "Connecte un utilisateur"
@@ -132,7 +132,7 @@ paths:
         "400":
           description: "Invalid username/password supplied"
   /user/logout:
-    get:
+    post:
       tags:
       - "user"
       summary: "Déconnecte un utilisateur"
@@ -204,29 +204,6 @@ paths:
       responses:
         200:
           description: "successful operation"
-  /connectedObject/login:
-    get:
-      tags:
-      - "connectedObject"
-      summary: "Connecte un connectedObject"
-      description: ""
-      operationId: "loginConnectedObject"
-      parameters:
-      - name: "username"
-        in: "query"
-        description: "Nom d'utilisateur"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "Mot de passe"
-        required: true
-        type: "string"
-      responses:
-        "200":
-          description: "successful operation"
-        "400":
-          description: "Invalid username/password supplied"
   /connectedObject/{name}:
     get:
       tags:
