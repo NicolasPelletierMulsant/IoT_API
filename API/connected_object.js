@@ -36,7 +36,7 @@ module.exports = app => {
     // Get object based on name + IP? (ip in headers?)
     app.get('/connectedObject/:name', (req, res) => {
         console.log(req.params);
-        pool.query(`SELECT type, name, ip_address, user FROM connected_object WHERE name = '${req.params.name}'`, (err, result) => {
+        pool.query(`SELECT type, name, ip_address, user FROM connected_object WHERE name = '${req.params.name}' AND user = '${req.query.user}'`, (err, result) => {
             if (err) {
                 console.log(err);
             } else if (result.length === 0) {
@@ -51,7 +51,7 @@ module.exports = app => {
 
     // Delete object based on name + IP? (ip in headers?)
     app.delete('/connectedObject/:name', (req, res) => {
-        pool.query(`DELETE FROM connected_object WHERE name = '${req.params.name}'`, (err, result) => {
+        pool.query(`DELETE FROM connected_object WHERE name = '${req.params.name}' AND user = '${req.query.user}'`, (err, result) => {
             if (err) {
                 console.log(err);
                 res.status(404).send("Error!");
